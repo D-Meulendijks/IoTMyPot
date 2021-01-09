@@ -5,16 +5,18 @@ import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 
-def takepic(name, path="."):
-    os.system('fswebcam %s/%s.jpg', path, name)
+def takePic(name, path="."):
+    os.system('fswebcam %s/%s', path, name)
 
-def sendpic(name, path):
+
+def sendPic(name, path = '', id = '249824748730293804'):
+    filepath = path + '/' + name
     mp_encoder = MultipartEncoder(
         fields={
-            'id': '249824748730293804',
+            'id': id,
             # plain file object, no filename or mime type produces a
             # Content-Disposition header with just the part name
-            'picture': ('pic1.jpg', open('bruh.jpg', 'rb'), 'image/x-icon'),
+            'picture': (name, open(filepath, 'rb'), 'image/x-icon'),
         }
     )
     r = requests.post(

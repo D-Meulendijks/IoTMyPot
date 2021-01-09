@@ -4,18 +4,22 @@ import hardwarespi
 import takepicsendpic
 import logcurrentreadings
 from apscheduler.schedulers.blocking import BlockingScheduler
-import datetime
+from datetime import datetime
+import os
 
 
 def take_image_and_send():
-    namecurrtimepic = datetime.datetime.now()           # get current time to save with timestamp
-    takepicsendpic.takepic(namecurrtimepic, "./pics")   # take the picture and save it
-    takepicsendpic.sendpic(namecurrtimepic, "./pics")   # take the saved picture and send it to the database
+    now = datetime.now()
+    t = now.strftime("%H_%M_%S")
+    namecurrtimepic = "image" + t + '.jpg'       # get current time to save with timestamp
+    takepicsendpic.takePic(namecurrtimepic, "./pics")   # take the picture and save it
+    takepicsendpic.sendPic(namecurrtimepic, "./pics")   # take the saved picture and send it to the database
 
 def take_measurements_and_send():
     namecurrtimemeasure = datetime.datetime.now()       # get current time to save with timestamp
     data = [hardwarespi.read_spi(i) for i in range(8)]  # read pin on MCP3008
     logcurrentreadings.tologs(data)                     # save the readings to a log file
+    logcurrentreadings.sendLog(data)                    # send all the readings to the database
 
 
 
@@ -30,3 +34,6 @@ if __name__ == '__main__':
     measscheduler = BlockingScheduler()
     measscheduler.add_job(take_measurements_and_send, 'interval', minutes=30)
     measscheduler.start()
+
+    # Open web browser and go to interface site
+    os.system("chromium-browser --start-fullscreen www.google.com")
