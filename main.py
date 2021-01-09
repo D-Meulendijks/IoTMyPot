@@ -24,16 +24,20 @@ def take_measurements_and_send():
 
 
 if __name__ == '__main__':
+    print("Setup hardware spi")
     hardwarespi.setup_spi()
 
     # Calls the function take_image_and_send every hour
+    print("Start pic scheduler")
     picscheduler = BlockingScheduler()
     picscheduler.add_job(take_image_and_send, 'interval', hours=1)
     picscheduler.start()
     # Calls the function take_measurements_and_send every 30 minutes
+    print("Start meas scheduler")
     measscheduler = BlockingScheduler()
     measscheduler.add_job(take_measurements_and_send, 'interval', minutes=30)
     measscheduler.start()
-
+    print("Setup done")
     # Open web browser and go to interface site
     os.system("chromium-browser --start-fullscreen www.google.com")
+    print("Browser opened")
