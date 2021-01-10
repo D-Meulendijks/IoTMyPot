@@ -18,26 +18,25 @@ def take_image_and_send():
 def take_measurements_and_send():
     namecurrtimemeasure = datetime.datetime.now()       # get current time to save with timestamp
     data = [hardwarespi.read_spi(i) for i in range(8)]  # read pin on MCP3008
-    logcurrentreadings.tologs(data)                     # save the readings to a log file
+#    logcurrentreadings.tologs(data)                     # save the readings to a log file
     logcurrentreadings.sendLog(data)                    # send all the readings to the database
 
-
+def docycle():
+    take_image_and_send()
+    take_measurements_and_send()
 
 if __name__ == '__main__':
+    UUID = '249824748730293804'
     print("Setup hardware spi")
     hardwarespi.setup_spi()
-    os.system("chromium-browser --start-fullscreen www.google.com")
+    os.system(f"chromium-browser --start-fullscreen https://victorious-mushroom-07a4faf03.azurestaticapps.net?key={UUID}")
     print("Browser opened")
 
     # Calls the function take_image_and_send every hour
     print("Start pic scheduler")
     picscheduler = BlockingScheduler()
-    picscheduler.add_job(take_image_and_send, 'interval', seconds=5)
+    picscheduler.add_job(docycle, 'interval', seconds=5)
     picscheduler.start()
     # Calls the function take_measurements_and_send every 30 minutes
-    print("Start meas scheduler")
-    measscheduler = BlockingScheduler()
-    measscheduler.add_job(take_measurements_and_send, 'interval', seconds=5)
-    measscheduler.start()
     print("Setup done")
     # Open web browser and go to interface site

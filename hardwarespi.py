@@ -4,10 +4,10 @@ import RPi.GPIO as GPIO
 import time
 import sys
 
-CLK = 21
-MISO = 20
-MOSI = 16
-CS = 19
+CLK = 29
+MISO = 31
+MOSI = 33
+CS = 35
 
 
 def setupSpiPins(clkPin, misoPin, mosiPin, csPin):
