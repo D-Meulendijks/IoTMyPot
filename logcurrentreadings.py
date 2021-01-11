@@ -4,7 +4,7 @@ import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 
-def tologs(data):
+def toLogs(data):
     f = open("logfile", "a")
     f.write(data)
     f.close
@@ -23,7 +23,7 @@ def sendLog(data, id = '249824748730293804'):
             'brightness4': data[4],
             'moistureair': data[5],
             'moistureground': data[6],
-            'score': data[7]
+            'score': 69
         }
     )
     r = requests.post(
