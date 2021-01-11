@@ -22,8 +22,8 @@ def sendLog(data, id = '249824748730293804'):
             'brightness3': data[3],
             'brightness4': data[4],
             'moistureair': data[5],
-            'moistureground': data[6],
-            'score': 69
+            'moistureground': data[6]#,
+            #score': 69
         }
     )
     r = requests.post(
