@@ -6,10 +6,12 @@ from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 
 def takePic(name, path="."):
+    print(f'taking picture and saving to {path}/{name}')
     os.system(f'fswebcam {path}/{name}')
 
 
 def sendPic(name, path = '.', id = '249824748730293804'):
+    print(f'sending picture from {path}/{name}')
     filepath = path + '/' + name
     mp_encoder = MultipartEncoder(
         fields={
