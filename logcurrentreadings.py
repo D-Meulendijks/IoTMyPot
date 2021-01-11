@@ -9,21 +9,21 @@ def toLogs(data):
     f.write(data)
     f.close
 
-def sendLog(data, id = '249824748730293804'):
-    print(f'sending log data {data}')
+def sendLog(data_received, id = '249824748730293804'):
+    print(f'sending log data {data_received}')
     mp_encoder = MultipartEncoder(
         fields={
             'id': id,
             # plain file object, no filename or mime type produces a
             # Content-Disposition header with just the part name
-            'temperature': data[0],
-            'brightness1': data[1],
-            'brightness2': data[2],
-            'brightness3': data[3],
-            'brightness4': data[4],
-            'moistureair': data[5],
-            'moistureground': data[6]#,
-            #score': 69
+            'temperature': data_received[0],
+            'brightness1': data_received[1],
+            'brightness2': data_received[2],
+            'brightness3': data_received[3],
+            'brightness4': data_received[4],
+            'moistureair': data_received[5],
+            'moistureground': data_received[6],
+            'score': data_received[7]
         }
     )
     r = requests.post(
