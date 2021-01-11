@@ -9,7 +9,7 @@ def tologs(data):
     f.write(data)
     f.close
 
-def sendlog(data, id = '249824748730293804'):
+def sendLog(data, id = '249824748730293804'):
     print(f'sending log data {data}')
     mp_encoder = MultipartEncoder(
         fields={
