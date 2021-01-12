@@ -41,7 +41,7 @@ if __name__ == '__main__':
     # Calls the function take_image_and_send every hour
     print("Start pic scheduler")
     picscheduler = BlockingScheduler()
-    picscheduler.add_job(docycle, 'interval', seconds=5)
+    picscheduler.add_job(docycle, 'interval', seconds=20)
     picscheduler.start()
     # Calls the function take_measurements_and_send every 30 minutes
     print("Setup done")
