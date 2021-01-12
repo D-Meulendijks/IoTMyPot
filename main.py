@@ -17,10 +17,11 @@ def take_image_and_send():
 
 
 def take_measurements_and_send():
-    now = datetime.now()
-    t = now.strftime("%H_%M_%S")
-    namecurrtimemeasure = t       # get current time to save with timestamp
+    # now = datetime.now()
+    # t = now.strftime("%H_%M_%S")
+    # namecurrtimemeasure = t       # get current time to save with timestamp
     data = [hardwarespi.read_spi(i) for i in range(8)]  # read pin on MCP3008
+    print(f"@@@@@ - > data measured {data}")
 #    logcurrentreadings.toLogs(data)                     # save the readings to a log file
     logcurrentreadings.sendLog(data)                    # send all the readings to the database
 

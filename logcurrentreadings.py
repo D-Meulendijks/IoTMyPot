@@ -11,7 +11,7 @@ def toLogs(data):
 
 def sendLog(data_received, id = '249824748730293804'):
     print(f'sending log data {data_received}')
-    data_received_int = [int(i) for i in data_received]
+    data_received_int = [str(i) for i in data_received]
     mp_encoder = MultipartEncoder(
         fields={
             'id': id,
